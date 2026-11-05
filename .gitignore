@@ -1,0 +1,14 @@
+# Credenciales y archivos privados: nunca se suben
+.env
+*.env
+credenciales*
+Neo4j-*.txt
+*password*
+# Respaldos generados localmente
+*.gz
+dump/
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*
