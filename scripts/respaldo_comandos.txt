@@ -1,0 +1,18 @@
+EJERCICIO 17 · RESPALDO Y RESTAURACION (Windows)
+Se ejecutan en PowerShell, NO dentro de mongosh.
+Primero entra a la carpeta del repositorio.
+Cambia HOST_REAL por el host de tu cluster (ej. comercio-u2.abc123.mongodb.net).
+La contraseña te la pide la herramienta: no la escribas en el comando.
+
+1) Respaldo comprimido de comercio_u2 (crea el archivo comercio_u2.gz):
+
+mongodump --uri="mongodb+srv://HOST_REAL/" --username=admin_tienda --authenticationDatabase=admin --db=comercio_u2 --archive=comercio_u2.gz --gzip
+
+2) Restauracion en una base DIFERENTE (comercio_u2_restaurada):
+
+mongorestore --uri="mongodb+srv://HOST_REAL/" --username=admin_tienda --authenticationDatabase=admin --archive=comercio_u2.gz --gzip --nsFrom="comercio_u2.*" --nsTo="comercio_u2_restaurada.*"
+
+3) Comprobar el archivo:   dir comercio_u2.gz
+4) Despues, en mongosh (como admin_tienda):   load("scripts/07_verificar_restauracion.js")
+
+NO uses --drop. NO restaures sobre comercio_u2.
